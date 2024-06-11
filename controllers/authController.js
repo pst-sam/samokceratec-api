@@ -29,13 +29,13 @@ const login = async (req, res) => {
                 "roles": foundUser.roles
             }
         },
-        '4fcae561ccfe52daccc312c24f39a4cd232e6026f67154dfd2c40d7080912df0cfa083be52727c47c7838166dc0da0cf70dde4e2baf08cc1fe17aa4cdbacb94c',
+        process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: '15m' }
     )
 
     const refreshToken = jwt.sign(
         { "username": foundUser.username },
-        '65b13ee5be29fb1677c0fbd0c57bfbaace5b01cf4e7b71620ae123425270a9c0afa0ba1a49c0ef54ad92b790cc061148ce8dcecf99924bf205cddc3f1a76208b',
+        process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: '7d' }
     )
 
@@ -63,7 +63,7 @@ const refresh = (req, res) => {
 
     jwt.verify(
         refreshToken,
-        '65b13ee5be29fb1677c0fbd0c57bfbaace5b01cf4e7b71620ae123425270a9c0afa0ba1a49c0ef54ad92b790cc061148ce8dcecf99924bf205cddc3f1a76208b',
+        process.env.REFRESH_TOKEN_SECRET,
         async (err, decoded) => {
             if (err) return res.status(403).json({ message: 'Forbidden' })
 
@@ -78,7 +78,7 @@ const refresh = (req, res) => {
                         "roles": foundUser.roles
                     }
                 },
-                '4fcae561ccfe52daccc312c24f39a4cd232e6026f67154dfd2c40d7080912df0cfa083be52727c47c7838166dc0da0cf70dde4e2baf08cc1fe17aa4cdbacb94c',
+                process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: '15m' }
             )
 
