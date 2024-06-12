@@ -63,7 +63,7 @@ const refresh = (req, res) => {
 
     jwt.verify(
         refreshToken,
-        process.env.REFRESH_TOKEN_SECRET,
+        '65b13ee5be29fb1677c0fbd0c57bfbaace5b01cf4e7b71620ae123425270a9c0afa0ba1a49c0ef54ad92b790cc061148ce8dcecf99924bf205cddc3f1a76208b',
         async (err, decoded) => {
             if (err) return res.status(403).json({ message: 'Forbidden' })
 
